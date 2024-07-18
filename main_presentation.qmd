@@ -1,0 +1,48 @@
+---
+title: "Programación en R para el análisis de la contaminación del aire"
+
+author: "Dr. Jair Carrillo"
+format:
+  revealjs: 
+    theme: night
+    chalkboard: true
+  
+editor: visual
+---
+
+# Semblanza
+
+
+
+# ¿ Que es r y Rstudio?
+
+::: {.incremental}
+
+- Programación orienta a objetos
+- Software gratuito
+- Variedad de paqueterías
+- Paquetes son actualizados y respaldados por la comunidad de R
+
+:::
+
+## Openair y Openairmaps: 
+
+## Slide with speaker notes
+
+Slide content
+
+::: {.notes}
+Esta lamina habla con la importancia de contar con un guión
+:::
+
+## Ejemplo
+
+```{r}
+#| echo: false
+#| output-location: slide
+library(ggplot2)
+ggplot(airquality, aes(Temp, Ozone)) + 
+  geom_point() + 
+  geom_smooth(method = "loess")
+```
+
