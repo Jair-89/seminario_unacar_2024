@@ -8,9 +8,10 @@
 <link href="main_presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="main_presentation_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="main_presentation_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.554">
+  <meta name="generator" content="quarto-1.4.555">
 
   <meta name="author" content="Dr.&nbsp;Jair Carrillo">
+  <meta name="dcterms.date" content="2024-12-08">
   <title>Programación en R para el análisis de la contaminación del aire</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -338,26 +339,53 @@ Dr.&nbsp;Jair Carrillo
 </div>
 </div>
 
+  <p class="date">2024-12-08</p>
 </section>
 <section id="semblanza" class="title-slide slide level1 center">
 <h1>Semblanza</h1>
 
 </section>
 
+<section id="introducción" class="title-slide slide level1 center">
+<h1>Introducción</h1>
+
+</section>
+
 <section>
 <section id="que-es-r-y-rstudio" class="title-slide slide level1 center">
 <h1>¿ Que es r y Rstudio?</h1>
+<div style="font-size: 0.5em; text-align:justified">
+<p>r es un software gratuito y con un ambiente para generar <strong>computación estadística</strong> y <strong>gráficas de alto nivel</strong>. Las principales características que posee este software son:</p>
 <div>
 <ul>
-<li class="fragment">Programación orienta a objetos</li>
-<li class="fragment">Software gratuito</li>
-<li class="fragment">Variedad de paqueterías</li>
-<li class="fragment">Paquetes son actualizados y respaldados por la comunidad de R</li>
+<li class="fragment">Orientado a objetos</li>
+<li class="fragment">Colección de funciones enfocadas en temas específicos (Paquetes)</li>
+<li class="fragment">Repositorio CRAN (+10,000 paquetes) y de la comunidad</li>
+<li class="fragment">Paquetes respaldados por la comunidad de R</li>
 </ul>
 </div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Rstudio (Posit) es una IDE que permite desarrollar códigos del software r, haciendo más sencillo su uso. A partir de 2023, se puede correr códigos del software pyhton, haciendo más dinámico emplear ambos tipos de software para extraer información, ordenarla, aplicar diversos análisis estadísticos, visuliazarlos y compartirlos.</p>
 </section>
 <section id="openair-y-openairmaps" class="slide level2">
 <h2>Openair y Openairmaps:</h2>
+<div>
+<ul>
+<li class="fragment">Openair: Conjunto de funciones que permiten limpiar, ordenar y visualizar diversos conjuntos de datos sobre calidad del aire.</li>
+</ul>
+<hr>
+<ul>
+<li class="fragment">Openairmaps: Conjunto de funciones que permiten visualizar espacialmente diversos conjuntos de datos enfocados en datos meteorologicos y de calidad del aire.</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
+
 </section>
 <section id="slide-with-speaker-notes" class="slide level2">
 <h2>Slide with speaker notes</h2>
@@ -379,9 +407,9 @@ Dr.&nbsp;Jair Carrillo
 <section id="ejemplo" class="slide level2">
 <h2>Ejemplo</h2>
 
-<img data-src="main_presentation_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
+<img data-src="main_presentation_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-
+<p>Reunión anual: Red Delfin de Contaminación Atmosférica</p>
 </div>
 </div>
 </section></section>
@@ -598,42 +626,80 @@ Dr.&nbsp;Jair Carrillo
       });
     </script>
     
+
     <script>
+
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
       // slide changes (different for each slide format).
+
       (function () {
+
         // dispatch for htmlwidgets
+
         function fireSlideEnter() {
+
           const event = window.document.createEvent("Event");
+
           event.initEvent("slideenter", true, true);
+
           window.document.dispatchEvent(event);
+
         }
+
+    
 
         function fireSlideChanged(previousSlide, currentSlide) {
+
           fireSlideEnter();
 
+    
+
           // dispatch for shiny
+
           if (window.jQuery) {
+
             if (previousSlide) {
+
               window.jQuery(previousSlide).trigger("hidden");
+
             }
+
             if (currentSlide) {
+
               window.jQuery(currentSlide).trigger("shown");
+
             }
+
           }
+
         }
+
+    
 
         // hookup for slidy
+
         if (window.w3c_slidy) {
+
           window.w3c_slidy.add_observer(function (slide_num) {
+
             // slide_num starts at position 1
+
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
           });
+
         }
 
+    
+
       })();
+
     </script>
+
+    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
