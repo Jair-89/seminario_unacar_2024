@@ -8,7 +8,7 @@
 <link href="main_presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="main_presentation_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="main_presentation_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.555">
+  <meta name="generator" content="quarto-1.4.554">
 
   <meta name="author" content="Dr.&nbsp;Jair Carrillo">
   <meta name="dcterms.date" content="2024-12-08">
@@ -365,18 +365,40 @@ Dr.&nbsp;Jair Carrillo
 <li class="fragment">Paquetes respaldados por la comunidad de R</li>
 </ul>
 </div>
-<p><img data-src="Rstudio-Logo-Flat.png" class="absolute" style="top: 400px; left: 0px; width: 250px; height: 100px; "> <img data-src="Rstudio-Logo-Flat.png" class="absolute" style="top: 400px; left: 600px; width: 250px; height: 100px; "></p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream <img data-src="main_presentation_files/figure-presentation/Rstudio-Logo-Flat.png" class="absolute" style="top: 400px; left: 0px; width: 250px; height: 90px; "> <img data-src="main_presentation_files/figure-presentation/Rstudio-Logo-Flat.png" class="absolute" style="top: 400px; left: 600px; width: 250px; height: 90px; "></p>
 </section>
 <section class="slide level2">
 
 <p>Rstudio (Posit) es una IDE que permite desarrollar códigos del software r, haciendo más sencillo su uso. A partir de 2023, se puede correr códigos del software pyhton, haciendo más dinámico emplear ambos tipos de software para extraer información, ordenarla, aplicar diversos análisis estadísticos, visuliazarlos y compartirlos.</p>
+</section></section>
+<section>
+<section id="openair-y-openairmaps" class="title-slide slide level1 center">
+<h1>## Openair y Openairmaps:</h1>
+
 </section>
-<section id="openair-y-openairmaps" class="slide level2">
-<h2>Openair y Openairmaps:</h2>
+<section id="openair-y-openairmaps-1" class="slide level2">
+<h2>Openair y Openairmaps</h2>
+<p>Paqueterías especializadas en el tratamiento de información referente a contaminación atmosférica. Diseñados por el Dr.&nbsp;Carslaw en la universidad</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Stashed changes</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <div>
 <ul>
 <li class="fragment">Openair: Conjunto de funciones que permiten limpiar, ordenar y visualizar diversos conjuntos de datos sobre calidad del aire.</li>
 </ul>
+<p><img data-src="main_presentation_files/figure-presentation/logo.png" class="absolute" style="top: 400px; left: 0px; width: 150px; height: 100px; "></p>
 <hr>
 <ul>
 <li class="fragment">Openairmaps: Conjunto de funciones que permiten visualizar espacialmente diversos conjuntos de datos enfocados en datos meteorologicos y de calidad del aire.</li>
@@ -627,80 +649,42 @@ Dr.&nbsp;Jair Carrillo
       });
     </script>
     
-
     <script>
-
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
       // slide changes (different for each slide format).
-
       (function () {
-
         // dispatch for htmlwidgets
-
         function fireSlideEnter() {
-
           const event = window.document.createEvent("Event");
-
           event.initEvent("slideenter", true, true);
-
           window.document.dispatchEvent(event);
-
         }
-
-    
 
         function fireSlideChanged(previousSlide, currentSlide) {
-
           fireSlideEnter();
 
-    
-
           // dispatch for shiny
-
           if (window.jQuery) {
-
             if (previousSlide) {
-
               window.jQuery(previousSlide).trigger("hidden");
-
             }
-
             if (currentSlide) {
-
               window.jQuery(currentSlide).trigger("shown");
-
             }
-
           }
-
         }
-
-    
 
         // hookup for slidy
-
         if (window.w3c_slidy) {
-
           window.w3c_slidy.add_observer(function (slide_num) {
-
             // slide_num starts at position 1
-
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
           });
-
         }
 
-    
-
       })();
-
     </script>
-
-    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
