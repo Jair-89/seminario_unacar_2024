@@ -38,6 +38,7 @@ r es un software gratuito y con un ambiente para generar **computación estadís
 -   Paquetes respaldados por la comunidad de R
 :::
 
+<<<<<<< Updated upstream
 ![](Rstudio-Logo-Flat.png){.absolute top=400 left=0 width="250" height="100"}
 ![](Rstudio-Logo-Flat.png){.absolute top=400 left=600 width="250" height="100"}
 --- 
@@ -45,6 +46,11 @@ r es un software gratuito y con un ambiente para generar **computación estadís
 Rstudio (Posit) es una IDE que permite desarrollar códigos del software r, haciendo más sencillo su uso. A partir de 2023, se puede correr códigos del software pyhton, haciendo más dinámico emplear ambos tipos de software para extraer información, ordenarla, aplicar diversos análisis estadísticos, visuliazarlos y compartirlos.
 
 ## Openair y Openairmaps:
+=======
+## Openair y Openairmaps
+
+Paqueterías especializadas en el tratamiento de información referente a contaminación atmosférica. Diseñados por el Dr. Car
+>>>>>>> Stashed changes
 
 ::: incremental
 - Openair: Conjunto de funciones que permiten limpiar, ordenar y visualizar diversos conjuntos de datos sobre calidad del aire. 
