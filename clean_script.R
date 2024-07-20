@@ -42,29 +42,35 @@ return(x)
 }
 
 pm10_apodaca <- clear_data_station("apodaca","pm10") |> 
-  rename(pm10 = concentration)
+  rename(pm10 = concentration) |> 
+  select(-parameter)
 
 pm2.5_apodaca <- clear_data_station("apodaca","pm25") |> 
-  rename(pm2.5 = concentration)
+  rename(pm2.5 = concentration)|> 
+  select(-parameter)
 
 o3_apodaca <- clear_data_station("apodaca","o3") |> 
-  rename(o3 = concentration)
+  rename(o3 = concentration)|> 
+  select(-parameter)
 
 so2_apodaca <- clear_data_station("apodaca","so2") |> 
-  rename(so2 = concentration)
+  rename(so2 = concentration)|> 
+  select(-parameter)
 
 no2_apodaca <- clear_data_station("apodaca","no2") |> 
-  rename(no2 = concentration)
+  rename(no2 = concentration)|> 
+  select(-parameter)
 
 co_apodaca <- clear_data_station("apodaca","co") |> 
-  rename(co = concentration)
+  rename(co = concentration)|> 
+  select(-parameter)
 
 pollutant_apodaca <- pm10_apodaca |> 
   left_join(pm2.5_apodaca)
 
 openair::aqStats(pm10_apodaca,pollutant = "pm10")
 
-openair::timePlot(pm10_apodaca,pollutant = "pm10",avg.time = "hour")
+openair::timePlot(pollutant_apodaca,pollutant = c("pm10","pm2.5"),avg.time = "hour",group = T)
 
 openair::calendarPlot(pm10_apodaca,pollutant = "pm10")
 
