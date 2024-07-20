@@ -47,7 +47,20 @@ pm10_apodaca <- clear_data_station("apodaca","pm10") |>
 pm2.5_apodaca <- clear_data_station("apodaca","pm25") |> 
   rename(pm2.5 = concentration)
 
+o3_apodaca <- clear_data_station("apodaca","o3") |> 
+  rename(o3 = concentration)
 
+so2_apodaca <- clear_data_station("apodaca","so2") |> 
+  rename(so2 = concentration)
+
+no2_apodaca <- clear_data_station("apodaca","no2") |> 
+  rename(no2 = concentration)
+
+co_apodaca <- clear_data_station("apodaca","co") |> 
+  rename(co = concentration)
+
+pollutant_apodaca <- pm10_apodaca |> 
+  left_join(pm2.5_apodaca)
 
 openair::aqStats(pm10_apodaca,pollutant = "pm10")
 
