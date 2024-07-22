@@ -1,7 +1,9 @@
 ---
-title: "Programación en R para el análisis de la contaminación del aire"
+title: "Programación en R para el análisis de la calidad del aire"
 author: "Dr. Jair Carrillo"
-date: "12-08-2024"
+date: "08-12-2024"
+date-format: full
+lang: es
 format:
   revealjs: 
     theme: night
@@ -23,7 +25,17 @@ p_load(tidyverse,
 
 # Semblanza
 
-- Supervisor de 
+- Investigación: "
+
+
+- Supervisor de calidad en la Secretaría de Medio Ambiente del Estado de Nuevo León
+
+![](main_presentation_files/figure-presentation/sima.jpg){.absolute top=270 left=900 width="200" height="150"}
+
+
+- Consultor ambiental 
+
+![](main_presentation_files/figure-presentation/consultoria.jpg){.absolute top=500 left=900 width="100" height="150"}
 
 # Introducción
 
@@ -38,7 +50,6 @@ r es un software gratuito y con un ambiente para generar **computación estadís
 -   Paquetes respaldados por la comunidad de R
 :::
 
-<<<<<<< Updated upstream
 ![](main_presentation_files/figure-presentation/Rstudio-Logo-Flat.png){.absolute top=400 left=0 width="250" height="90"}
 ![](main_presentation_files/figure-presentation/Rstudio-Logo-Flat.png){.absolute top=400 left=600 width="250" height="90"}
 --- 
