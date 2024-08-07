@@ -70,7 +70,20 @@ pollutant_apodaca <- pm10_apodaca |>
 
 openair::aqStats(pm10_apodaca,pollutant = "pm10")
 
-openair::timePlot(pollutant_apodaca,pollutant = c("pm10","pm2.5"),avg.time = "hour",group = T)
+openair::timePlot(pollutant_apodaca,pollutant = c("pm10","pm2.5"),avg.time = "day",group = T,data.thresh = 75)
 
-openair::calendarPlot(pm10_apodaca,pollutant = "pm10")
+station_calendar_plot <- function(my_pol){
+  
+x <- pollutant_apodaca |> 
+  openair::calendarPlot(
+    pollutant = my_pol,
+    breaks = mutate(breaks=case_when(my_pol=='pm10'~c(0,30,45,95,135,200),
+                       my_pol=='pm2.5'~c(0,20,35,45,95,200),
+                       .default = my_pol)),
+    cols = c("green","yellow","orange","red","purple"))
 
+return(x)
+  
+}
+
+station_calendar_plot("pm2.5")
