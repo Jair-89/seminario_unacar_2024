@@ -23,7 +23,7 @@ p_load(tidyverse,
 ```
 
 
-# Semblanza
+# Semblanza {style="font-size: 0.8em; text-align:justify"}
 
 - Investigación: "
 
@@ -39,7 +39,7 @@ p_load(tidyverse,
 
 # Introducción
 
-# ¿ Que es r y Rstudio? {style="font-size: 0.5em; text-align:justified"}
+# ¿ Que es r y Rstudio? {style="font-size: 0.8em; text-align:justify"}
 
 r es un software gratuito y con un ambiente para generar **computación estadística** y **gráficas de alto nivel**. Las principales características que posee este software son:
 
@@ -50,31 +50,52 @@ r es un software gratuito y con un ambiente para generar **computación estadís
 -   Paquetes respaldados por la comunidad de R
 :::
 
-![](main_presentation_files/figure-presentation/Rstudio-Logo-Flat.png){.absolute top=400 left=0 width="250" height="90"}
-![](main_presentation_files/figure-presentation/Rstudio-Logo-Flat.png){.absolute top=400 left=600 width="250" height="90"}
+![](main_presentation_files/figure-presentation/r_logo.png){.absolute top=500 left=450 width="100" height="100"}
+
+
+::: notes
+Los paquetes son un conjunto de funciones que han sido revisadas por la comunidad y el CRAN, dandole una mayor confiabilidad al paquete que se encuentra en CRAN, en el caso de los paquetes hechos por la comunidad no se tiene la certeza de tener un mantenimiento constante o en su defecto, si las funciones son correctas. 
+:::
 --- 
 
-Rstudio (Posit) es una IDE que permite desarrollar códigos del software r, haciendo más sencillo su uso. A partir de 2023, se puede correr códigos del software pyhton, haciendo más dinámico emplear ambos tipos de software para extraer información, ordenarla, aplicar diversos análisis estadísticos, visuliazarlos y compartirlos.
+# {style="font-size: 0.8em; text-align:justify"}
 
-## Openair y Openairmaps:
-=======
-## Openair y Openairmaps
+Rstudio (Posit) es una IDE que permite desarrollar códigos del software r, haciendo más sencillo su uso. A partir de 2023, se puede correr códigos del software python, haciendo más dinámico emplear ambos tipos de software para extraer información, ordenarla, aplicar diversos análisis estadísticos, visuliazarlos y compartirlos.
 
-Paqueterías especializadas en el tratamiento de información referente a contaminación atmosférica. Diseñados por el Dr. Carslaw en la universidad 
+![](main_presentation_files/figure-presentation/Rstudio-Logo-Flat.png){.absolute top=400 left=600 width="250" height="90"}
 
->>>>>>> Stashed changes
+## Openair y Openairmaps {style="font-size: 0.8em; text-align:justify"}
 
-::: incremental
+Paqueterías especializadas en el tratamiento de información referente a contaminación atmosférica. Diseñados por el Dr. David Carslaw de la universidad de York en Inglaterra. 
+
 - Openair: Conjunto de funciones que permiten limpiar, ordenar y visualizar diversos conjuntos de datos sobre calidad del aire. 
 
-![](main_presentation_files/figure-presentation/logo.png){.absolute top=400 left=0 width="150" height="100"}
+![](main_presentation_files/figure-presentation/logo.png){.absolute top=450 left=450 width="200" height="200"}
 
 ---
 
-- Openairmaps: Conjunto de funciones que permiten visualizar espacialmente diversos conjuntos de datos enfocados en datos meteorologicos y de calidad del aire.
+# {style="font-size: 0.8em; text-align:justify"}
+
+- Openairmaps: Conjunto de funciones que permiten visualizar espacialmente diversos conjuntos de datos enfocados en datos meteorológicos y de calidad del aire.
+
+![](main_presentation_files/figure-presentation/openairmaps.png){.absolute top=400 left=450 width="190" height="200"}
+
+# Caso de Estudio
+
+## Zona metropolitana de Monterrey (ZMM) {style="font-size: 0.8em; text-align:justify"}
+
+De acuerdo al último informe del Sistema Nacional de Información de la Calidad del Aire (SINAICA), la ZMM ocupa los primeros lugares de altas concentraciones de los siguientes contaminantes:
+
+::: Incremental
+-PM~10~
+
+-PM~2.5~
+
+-O~3~
 :::
 
-# 
+
+
 ## Slide with speaker notes
 
 Slide content
