@@ -6,7 +6,61 @@ p_load(tidyverse,
        openairmaps,
        readxl,
        janitor,
-       lubridate)
+       lubridate,
+       fs)
+
+
+
+path <- paste0(getwd(),"/main_presentation_files/database-presentation/nl_data/")
+
+data_list <- path |> 
+  dir_ls() |> 
+  map(
+    .f= function(path){
+      read_csv(
+        path
+      )
+      }
+  )
+
+table_data_list <- data_list |> 
+  set_names(dir_ls(path)) |> 
+  bind_rows(.id = "file_path") |> 
+  rename(
+    nombre_estacion = "Nombre de la estación",
+    clave_estacion = "Clave de la estación")
+
+
+pollution_call <- function(my_pol){
+  
+  x <- table_data_list |> 
+    filter(
+      parametro == my_pol
+    ) 
+  
+  return(x)
+}
+
+eda_pm10 <- pollution_call("PM10") |> 
+  openair::aqStats(pollutant = "concentracion",type="nombre_estacion")
+
+station_calendar_plot <- function(my_pol){
+  
+  my_pol_break <- case_when(
+    my_pol=='pm10'~c(0,30,45,95,135,200),
+    my_pol=='pm2.5'~c(0,20,35,45,95,200)
+  )
+  
+  
+  x <- pollutant_apodaca |> 
+    openair::calendarPlot(
+      pollutant = my_pol,
+      breaks = my_pol_break,
+      cols = c("green","yellow","orange","red","purple"))
+  
+  return(x)
+  
+}
 
 clear_data_station <- function(my_station,my_parameter){
   
@@ -41,49 +95,4 @@ return(x)
 
 }
 
-pm10_apodaca <- clear_data_station("apodaca","pm10") |> 
-  rename(pm10 = concentration) |> 
-  select(-parameter)
 
-pm2.5_apodaca <- clear_data_station("apodaca","pm25") |> 
-  rename(pm2.5 = concentration)|> 
-  select(-parameter)
-
-o3_apodaca <- clear_data_station("apodaca","o3") |> 
-  rename(o3 = concentration)|> 
-  select(-parameter)
-
-so2_apodaca <- clear_data_station("apodaca","so2") |> 
-  rename(so2 = concentration)|> 
-  select(-parameter)
-
-no2_apodaca <- clear_data_station("apodaca","no2") |> 
-  rename(no2 = concentration)|> 
-  select(-parameter)
-
-co_apodaca <- clear_data_station("apodaca","co") |> 
-  rename(co = concentration)|> 
-  select(-parameter)
-
-pollutant_apodaca <- pm10_apodaca |> 
-  left_join(pm2.5_apodaca)
-
-openair::aqStats(pm10_apodaca,pollutant = "pm10")
-
-openair::timePlot(pollutant_apodaca,pollutant = c("pm10","pm2.5"),avg.time = "day",group = T,data.thresh = 75)
-
-station_calendar_plot <- function(my_pol){
-  
-x <- pollutant_apodaca |> 
-  openair::calendarPlot(
-    pollutant = my_pol,
-    breaks = mutate(breaks=case_when(my_pol=='pm10'~c(0,30,45,95,135,200),
-                       my_pol=='pm2.5'~c(0,20,35,45,95,200),
-                       .default = my_pol)),
-    cols = c("green","yellow","orange","red","purple"))
-
-return(x)
-  
-}
-
-station_calendar_plot("pm2.5")
