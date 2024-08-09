@@ -36,13 +36,13 @@ pollution_call <- function(my_pol){
   x <- table_data_list |> 
     filter(
       parametro == my_pol
-    ) 
+    ) |> 
+    rename(my_pol = concentracion)
   
   return(x)
 }
 
-eda_pm10 <- pollution_call("PM10") |> 
-  openair::aqStats(pollutant = "concentracion",type="nombre_estacion")
+
 
 station_calendar_plot <- function(my_pol){
   
