@@ -19,7 +19,12 @@ editor: visual
 library(pacman)
 p_load(tidyverse,
        openair,
-       openairmaps)
+       openairmaps,
+       gt)
+```
+
+```{r}
+source("clean_script.R")
 ```
 
 
@@ -94,6 +99,18 @@ De acuerdo al último informe del Sistema Nacional de Información de la Calidad
 
 -O~3~
 :::
+
+## Análisis Exploratorio de los Datos (EDA)
+
+```{r}
+eda_pm10 <- pollution_call("PM10") |> 
+  select(-file_path,) |> 
+  openair::aqStats(pollutant = "concentracion",type="nombre_estacion") |> 
+  select(-pollutant)
+
+eda_pm10
+  
+```
 
 
 

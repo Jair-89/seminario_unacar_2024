@@ -37,6 +37,13 @@ data_sinaica_2022 <- read_csv(
 ) |> 
   rename(id_estacion="estacionesId")
 
+data_sinaica_meteo <- read_csv(
+  paste0(
+    url,"Anexo SISAI 143/Meteorología Datos NO validados 2020-2024.csv"
+  )
+) |> 
+  rename(id_estacion="estacionesId")
+
 data_sinaica_20_22 <- data_sinaica_2020 |> 
   bind_rows(data_sinaica_2021) |> 
   bind_rows(data_sinaica_2022)
@@ -98,6 +105,27 @@ monterrey_sinaica <- union_dic_data_sinaica_20_24 |>
   write_csv(
     file = paste0(
       url,"Anexo SISAI 143/data_monterrey_2022.csv"))
+
+
+unique(data_sinaica_meteo$validoOrig)
+
+clean_data_sinaica_meteo <- data_sinaica_meteo |> 
+  full_join(clean_diccionario_sinaica,by=c("id_estacion"))
+
+monterrey_meteo_sinaica <- clean_data_sinaica_meteo |> 
+  filter(codigo == "MTY",
+         parametro %in% c("DV", "HR", "PP", "RS", "VV")) |> 
+  mutate(
+    date = ymd_h(paste(fecha,hora)),
+    valorOrig  = as.numeric(valorOrig ),
+    year_date = year(date)
+  ) |> 
+  rename(concentracion = valorOrig) |> 
+  filter(year_date == 2022) |> 
+  select(-c(fecha,hora,SMCA,year_date,'Red de monitoreo',Municipio,id_estacion,codigo,validoOrig)) |> 
+  write_csv(
+    file = paste0(
+      url,"Anexo SISAI 143/data_monterrey_meteo_2022.csv"))
 
 
 monterrey_sinaica

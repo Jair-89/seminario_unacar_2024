@@ -33,15 +33,17 @@ table_data_list <- data_list |>
 
 pollution_call <- function(my_pol){
   
+  pol_name <- my_pol
+  
   x <- table_data_list |> 
     filter(
       parametro == my_pol
     ) |> 
-    rename(my_pol = concentracion)
+    rename( pol_name= concentracion)
   
   return(x)
 }
-
+pollution_call("PM10")
 
 
 station_calendar_plot <- function(my_pol){
