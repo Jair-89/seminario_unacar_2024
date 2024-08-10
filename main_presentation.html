@@ -8,7 +8,7 @@
 <link href="main_presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="main_presentation_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="main_presentation_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.554">
+  <meta name="generator" content="quarto-1.4.555">
 
   <meta name="author" content="(c) Dr.&nbsp;Jair Carrillo">
   <title>Programación en R para el análisis de la calidad del aire</title>
@@ -344,7 +344,7 @@
 <h1>Semblanza</h1>
 <div>
 <ul>
-<li class="fragment"><p>Investigación: ”</p></li>
+<li class="fragment"><p>Investigación: “Efecto de micropartículas de carbonato de calcio y dióxido de silicio presentes en el material particulado fino del área metropolitana de Monterrey, en la compresibilidad del surfactante pulmonar”</p></li>
 <li class="fragment"><p>Supervisor de calidad en la Secretaría de Medio Ambiente del Estado de Nuevo León</p></li>
 </ul>
 <p><img data-src="main_presentation_files/figure-presentation/sima.jpg" class="absolute" style="top: 270px; left: 900px; width: 200px; height: 150px; "></p>
@@ -423,10 +423,21 @@
 <section id="zona-metropolitana-de-monterrey-zmm" class="slide level2" style="font-size: 0.8em; text-align:justify">
 <h2>Zona metropolitana de Monterrey (ZMM)</h2>
 <p>De acuerdo al último informe del Sistema Nacional de Información de la Calidad del Aire (SINAICA), la ZMM ocupa los primeros lugares de altas concentraciones de los siguientes contaminantes:</p>
+<p>…</p>
 <div class="Incremental">
 <p>-PM<sub>10</sub></p>
 <p>-PM<sub>2.5</sub></p>
 <p>-O<sub>3</sub></p>
+</div>
+</section>
+<section id="análisis-exploratorio-de-los-datos-eda" class="slide level2" style="font-size: 0.8em; text-align:justify">
+<h2>Análisis Exploratorio de los Datos (EDA)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+
+</div><div class="column" style="width:50%;">
+<p>Add graph</p>
+</div>
 </div>
 </section>
 <section id="slide-with-speaker-notes" class="slide level2">
@@ -449,7 +460,7 @@
 <section id="ejemplo" class="slide level2">
 <h2>Ejemplo</h2>
 
-<img data-src="main_presentation_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
+<img data-src="main_presentation_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 <p>Reunión anual: Red Delfin de Contaminación Atmosférica</p>
 </div>
@@ -668,42 +679,80 @@
       });
     </script>
     
+
     <script>
+
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
       // slide changes (different for each slide format).
+
       (function () {
+
         // dispatch for htmlwidgets
+
         function fireSlideEnter() {
+
           const event = window.document.createEvent("Event");
+
           event.initEvent("slideenter", true, true);
+
           window.document.dispatchEvent(event);
+
         }
+
+    
 
         function fireSlideChanged(previousSlide, currentSlide) {
+
           fireSlideEnter();
 
+    
+
           // dispatch for shiny
+
           if (window.jQuery) {
+
             if (previousSlide) {
+
               window.jQuery(previousSlide).trigger("hidden");
+
             }
+
             if (currentSlide) {
+
               window.jQuery(currentSlide).trigger("shown");
+
             }
+
           }
+
         }
+
+    
 
         // hookup for slidy
+
         if (window.w3c_slidy) {
+
           window.w3c_slidy.add_observer(function (slide_num) {
+
             // slide_num starts at position 1
+
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
           });
+
         }
 
+    
+
       })();
+
     </script>
+
+    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {

@@ -5,11 +5,10 @@ date: "08-12-2024"
 date-format: full
 lang: es
 format:
-  revealjs: 
+  revealjs:
     theme: night
     chalkboard: true
     footer: "Reunión anual: Red Delfin de Contaminación Atmosférica"
-  
 editor: visual
 ---
 
@@ -20,10 +19,11 @@ library(pacman)
 p_load(tidyverse,
        openair,
        openairmaps,
-       gt)
+       gt,shiny)
 ```
 
 ```{r}
+#| echo: false
 source("clean_script.R")
 ```
 
@@ -31,7 +31,7 @@ source("clean_script.R")
 # Semblanza {style="font-size: 0.8em; text-align:justify"}
 
 :::incremental
-- Investigación: "
+- Investigación: "Efecto de micropartículas de carbonato de calcio y dióxido de silicio presentes en el material particulado fino del área metropolitana de Monterrey, en la compresibilidad del surfactante pulmonar"
 
 
 - Supervisor de calidad en la Secretaría de Medio Ambiente del Estado de Nuevo León
@@ -43,6 +43,7 @@ source("clean_script.R")
 
 ![](main_presentation_files/figure-presentation/consultoria.jpg){.absolute top=500 left=900 width="100" height="150"}
 :::
+
 # Introducción
 
 # ¿ Que es r y Rstudio? {style="font-size: 0.8em; text-align:justify"}
@@ -92,6 +93,8 @@ Paqueterías especializadas en el tratamiento de información referente a contam
 
 De acuerdo al último informe del Sistema Nacional de Información de la Calidad del Aire (SINAICA), la ZMM ocupa los primeros lugares de altas concentraciones de los siguientes contaminantes:
 
+...
+
 ::: Incremental
 -PM~10~
 
@@ -100,19 +103,27 @@ De acuerdo al último informe del Sistema Nacional de Información de la Calidad
 -O~3~
 :::
 
-## Análisis Exploratorio de los Datos (EDA)
+## Análisis Exploratorio de los Datos (EDA) {style="font-size: 0.8em; text-align:justify"}
 
+:::{.columns}
+
+:::{.column width="50%"}
 ```{r}
 eda_pm10 <- pollution_call("PM10") |> 
-  select(-file_path,) |> 
-  openair::aqStats(pollutant = "concentracion",type="nombre_estacion") |> 
-  select(-pollutant)
-
-eda_pm10
+  openair::aqStats(pollutant = "PM10",type="nombre_estacion") |> 
+  gt()
   
 ```
+:::
+
+:::{.column width="50%"}
+
+Add graph
+
+:::
 
 
+:::
 
 ## Slide with speaker notes
 
@@ -133,3 +144,5 @@ ggplot(airquality, aes(Temp, Ozone)) +
   geom_smooth(method = "loess")
   
 ```
+
+
