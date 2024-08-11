@@ -11,7 +11,7 @@ p_load(tidyverse,
 
 
 
-path <- paste0(getwd(),"/main_presentation_files/database-presentation/nl_data/")
+path <- paste0(getwd(),"/main_presentation_files/database-presentation/cdmx/")
 
 data_list <- path |> 
   dir_ls() |> 
@@ -25,10 +25,7 @@ data_list <- path |>
 
 table_data_list <- data_list |> 
   set_names(dir_ls(path)) |> 
-  bind_rows(.id = "file_path") |> 
-  rename(
-    nombre_estacion = "Nombre de la estación",
-    clave_estacion = "Clave de la estación")
+  bind_rows(.id = "file_path")
 
 
 pollution_call <- function(my_pol){
@@ -52,7 +49,7 @@ station_calendar_plot <- function(my_pol){
   )
   
   
-  x <- pollutant_apodaca |> 
+  x <- pollution_call(my_pol) |> 
     openair::calendarPlot(
       pollutant = my_pol,
       breaks = my_pol_break,
@@ -61,38 +58,4 @@ station_calendar_plot <- function(my_pol){
   return(x)
   
 }
-
-clear_data_station <- function(my_station,my_parameter){
-  
-  my_file <- paste0(my_station,"_",my_parameter,"_2024.csv")
-  
-  x <- read_csv(
-    paste0(getwd(),"/main_presentation_files/database-presentation/nuevo_leon/",my_file)
-    ) |> 
-    janitor::remove_empty(
-      "rows"
-      ) |> 
-    mutate(
-      hora = str_split(Hora,"-")
-      ) |> 
-    unnest_wider(
-      hora,names_sep = ""
-      ) |> 
-    mutate(
-      date_convert = paste(Fecha,hora2),
-      date = dmy_hm(date_convert),
-      station = my_station
-      ) |> 
-    rename(
-      parameter = Parametro,
-           concentration = `Concentraciones horarias`
-      ) |> 
-    select(
-      c(date,parameter,station,concentration)
-      )
-
-return(x)
-
-}
-
 

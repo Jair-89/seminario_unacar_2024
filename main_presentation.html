@@ -8,7 +8,7 @@
 <link href="main_presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="main_presentation_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="main_presentation_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.555">
+  <meta name="generator" content="quarto-1.4.554">
 
   <meta name="author" content="(c) Dr.&nbsp;Jair Carrillo">
   <title>Programación en R para el análisis de la calidad del aire</title>
@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
   <link rel="stylesheet" href="main_presentation_files/libs/revealjs/dist/theme/quarto.css">
   <link href="main_presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -420,42 +485,91 @@
 <h1>Caso de Estudio</h1>
 
 </section>
-<section id="zona-metropolitana-de-monterrey-zmm" class="slide level2" style="font-size: 0.8em; text-align:justify">
-<h2>Zona metropolitana de Monterrey (ZMM)</h2>
-<p>De acuerdo al último informe del Sistema Nacional de Información de la Calidad del Aire (SINAICA), la ZMM ocupa los primeros lugares de altas concentraciones de los siguientes contaminantes:</p>
-<p>…</p>
+<section id="red-autómatica-de-monitoreo-atmósferico-rama" class="slide level2" style="font-size: 0.8em; text-align:justify">
+<h2>Red Autómatica de Monitoreo Atmósferico (RAMA)</h2>
+<p>Se extiende a lo largo del valle del México, teniendo 32 estaciones de monitoreo entre la ciudad de México y Estado de México. Está red es de las más extensas y la primera en operar en México (1986) la cual dio paso a los procedimientos y leyes en materia de contaminación atmosférica y control de emisiones. Actualmente mide las concentraciones de los contaminantes criterio:</p>
 <div class="Incremental">
 <p>-PM<sub>10</sub></p>
 <p>-PM<sub>2.5</sub></p>
 <p>-O<sub>3</sub></p>
+<p>-SO<sub>2</sub></p>
+<p>-NO<sub>2</sub></p>
+<p>-CO</p>
 </div>
+<p>La información es compartida atraves de su página: aire.cdmx.gob.mx y en el portal de datos abiertos de la ciudad de México, además del Sistema Nacional de Información de la Calidad del Aire (SINAICA).</p>
+</section>
+<section id="adquisición-de-datos" class="slide level2" style="font-size: 0.8em; text-align:justify">
+<h2>Adquisición de Datos</h2>
+<p>La información de esta presentación fue adquirida mediante solicitud de Transparencia en la cual se obtuvo datos de la RAMA para los años 2021-2022.</p>
+<div class="sourceCode" id="cb1" data-code-line-numbers="|1|4-5|8-12|13-16|17-21|22-24|25-29|30-31|34|37-44|47|50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>dl_station_pol <span class="ot">&lt;-</span> <span class="cf">function</span>(anio_inicio, anio_fin, my_station, my_pol) {</span>
+<span id="cb1-2"><a href=""></a>  </span>
+<span id="cb1-3"><a href=""></a>  <span class="co"># Asegurarse de que los años se manejen correctamente como números</span></span>
+<span id="cb1-4"><a href=""></a>  anio_inicio <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(anio_inicio)</span>
+<span id="cb1-5"><a href=""></a>  anio_fin <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(anio_fin)</span>
+<span id="cb1-6"><a href=""></a>  </span>
+<span id="cb1-7"><a href=""></a>  <span class="co"># Filtrar y manipular los datos</span></span>
+<span id="cb1-8"><a href=""></a>  x <span class="ot">&lt;-</span> table_data_list <span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a href=""></a>    <span class="fu">filter</span>(</span>
+<span id="cb1-10"><a href=""></a>      SMCA <span class="sc">==</span> my_station,</span>
+<span id="cb1-11"><a href=""></a>      parametro <span class="sc">==</span> my_pol</span>
+<span id="cb1-12"><a href=""></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb1-13"><a href=""></a>    <span class="fu">mutate</span>(</span>
+<span id="cb1-14"><a href=""></a>      <span class="at">date =</span> <span class="fu">ymd_h</span>(<span class="fu">paste</span>(fecha, hora)),</span>
+<span id="cb1-15"><a href=""></a>      <span class="at">year_date =</span> <span class="fu">year</span>(date)</span>
+<span id="cb1-16"><a href=""></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb1-17"><a href=""></a>    <span class="fu">rename</span>(</span>
+<span id="cb1-18"><a href=""></a>      <span class="at">concentracion =</span> valorAct,</span>
+<span id="cb1-19"><a href=""></a>      <span class="at">clave_estacion =</span> <span class="st">'Clave de la estación'</span>,</span>
+<span id="cb1-20"><a href=""></a>      <span class="at">nombre_estacion =</span> <span class="st">'Nombre de la estación'</span></span>
+<span id="cb1-21"><a href=""></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb1-22"><a href=""></a>    <span class="fu">filter</span>(</span>
+<span id="cb1-23"><a href=""></a>      year_date <span class="sc">&gt;=</span> anio_inicio <span class="sc">&amp;</span> year_date <span class="sc">&lt;=</span> anio_fin</span>
+<span id="cb1-24"><a href=""></a>    ) <span class="sc">|&gt;</span>  </span>
+<span id="cb1-25"><a href=""></a>    <span class="fu">select</span>(</span>
+<span id="cb1-26"><a href=""></a>      <span class="sc">-</span><span class="fu">c</span>(file_path, nivelValidacion, <span class="st">'Red de monitoreo'</span>, </span>
+<span id="cb1-27"><a href=""></a>         year_date,fecha, hora,O3, CO, SO2, NO2, PM2<span class="fl">.5</span>, </span>
+<span id="cb1-28"><a href=""></a>         PM10, VV, DV, TMP,HR, PP, RS)</span>
+<span id="cb1-29"><a href=""></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb1-30"><a href=""></a>    <span class="fu">left_join</span>(coord_station_sinaica) <span class="sc">|&gt;</span> </span>
+<span id="cb1-31"><a href=""></a>    <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(alt,obs_estac,SMCA,Municipio))</span>
+<span id="cb1-32"><a href=""></a>  </span>
+<span id="cb1-33"><a href=""></a>  <span class="co"># Formatear la columna date</span></span>
+<span id="cb1-34"><a href=""></a>  x<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">format</span>(x<span class="sc">$</span>date, <span class="st">"%Y-%m-%d %H:%M:%S"</span>)</span>
+<span id="cb1-35"><a href=""></a>  </span>
+<span id="cb1-36"><a href=""></a>  <span class="co"># Escribir el resultado en un archivo CSV</span></span>
+<span id="cb1-37"><a href=""></a>  <span class="fu">write.csv</span>(</span>
+<span id="cb1-38"><a href=""></a>    x,</span>
+<span id="cb1-39"><a href=""></a>    <span class="at">file =</span> <span class="fu">paste0</span>(</span>
+<span id="cb1-40"><a href=""></a>      <span class="fu">getwd</span>(), <span class="st">"/main_presentation_files/database-presentation/cdmx/data_"</span>, </span>
+<span id="cb1-41"><a href=""></a>      my_pol, <span class="st">"_"</span>, my_station, <span class="st">"_"</span>, anio_inicio, <span class="st">"_to_"</span>, anio_fin, <span class="st">".csv"</span></span>
+<span id="cb1-42"><a href=""></a>    ),</span>
+<span id="cb1-43"><a href=""></a>    <span class="at">fileEncoding =</span> <span class="st">"latin1"</span></span>
+<span id="cb1-44"><a href=""></a>  )</span>
+<span id="cb1-45"><a href=""></a>  </span>
+<span id="cb1-46"><a href=""></a>  <span class="co"># Devolver el data frame filtrado y manipulado</span></span>
+<span id="cb1-47"><a href=""></a>  <span class="fu">return</span>(x)</span>
+<span id="cb1-48"><a href=""></a>}</span>
+<span id="cb1-49"><a href=""></a></span>
+<span id="cb1-50"><a href=""></a><span class="fu">dl_station_pol</span>(<span class="dv">2022</span>,<span class="dv">2022</span>,<span class="st">"Ciudad de México"</span>,<span class="st">"PM10"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="análisis-exploratorio-de-los-datos-eda" class="slide level2" style="font-size: 0.8em; text-align:justify">
 <h2>Análisis Exploratorio de los Datos (EDA)</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-
-</div><div class="column" style="width:50%;">
-<p>Add graph</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="main_presentation_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+</figure>
 </div>
 </div>
-</section>
-<section id="slide-with-speaker-notes" class="slide level2">
-<h2>Slide with speaker notes</h2>
-<p>Slide content</p>
-<aside class="notes">
-<p>Esta lamina habla con la importancia de contar con un guión</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="main_presentation_files/figure-revealjs/unnamed-chunk-3-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="ejemplo" class="slide level2">
 <h2>Ejemplo</h2>
@@ -679,80 +793,42 @@
       });
     </script>
     
-
     <script>
-
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
       // slide changes (different for each slide format).
-
       (function () {
-
         // dispatch for htmlwidgets
-
         function fireSlideEnter() {
-
           const event = window.document.createEvent("Event");
-
           event.initEvent("slideenter", true, true);
-
           window.document.dispatchEvent(event);
-
         }
-
-    
 
         function fireSlideChanged(previousSlide, currentSlide) {
-
           fireSlideEnter();
 
-    
-
           // dispatch for shiny
-
           if (window.jQuery) {
-
             if (previousSlide) {
-
               window.jQuery(previousSlide).trigger("hidden");
-
             }
-
             if (currentSlide) {
-
               window.jQuery(currentSlide).trigger("shown");
-
             }
-
           }
-
         }
-
-    
 
         // hookup for slidy
-
         if (window.w3c_slidy) {
-
           window.w3c_slidy.add_observer(function (slide_num) {
-
             // slide_num starts at position 1
-
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
           });
-
         }
 
-    
-
       })();
-
     </script>
-
-    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {

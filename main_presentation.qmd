@@ -9,6 +9,7 @@ format:
     theme: night
     chalkboard: true
     footer: "Reunión anual: Red Delfin de Contaminación Atmosférica"
+    code-block-height: 450px
 editor: visual
 ---
 
@@ -22,10 +23,7 @@ p_load(tidyverse,
        gt,shiny)
 ```
 
-```{r}
-#| echo: false
-source("clean_script.R")
-```
+
 
 
 # Semblanza {style="font-size: 0.8em; text-align:justify"}
@@ -89,11 +87,9 @@ Paqueterías especializadas en el tratamiento de información referente a contam
 
 # Caso de Estudio
 
-## Zona metropolitana de Monterrey (ZMM) {style="font-size: 0.8em; text-align:justify"}
+## Red Autómatica de Monitoreo Atmósferico (RAMA) {style="font-size: 0.8em; text-align:justify"}
 
-De acuerdo al último informe del Sistema Nacional de Información de la Calidad del Aire (SINAICA), la ZMM ocupa los primeros lugares de altas concentraciones de los siguientes contaminantes:
-
-...
+Se extiende a lo largo del valle del México, teniendo 32 estaciones de monitoreo entre la ciudad de México y Estado de México. Está red es de las más extensas y la primera en operar en México (1986) la cual dio paso a los procedimientos y leyes en materia de contaminación atmosférica y control de emisiones. Actualmente mide las concentraciones de los contaminantes criterio:
 
 ::: Incremental
 -PM~10~
@@ -101,37 +97,87 @@ De acuerdo al último informe del Sistema Nacional de Información de la Calidad
 -PM~2.5~
 
 -O~3~
+
+-SO~2~
+
+-NO~2~
+
+-CO
 :::
+
+La información es compartida atraves de su página: aire.cdmx.gob.mx y en el portal de datos abiertos de la ciudad de México, además del Sistema Nacional de Información de la Calidad del Aire (SINAICA).
+
+## Adquisición de Datos {style="font-size: 0.8em; text-align:justify"}
+
+La información de esta presentación fue adquirida mediante solicitud de Transparencia en la cual se obtuvo datos de la RAMA para los años 2021-2022. 
+
+```{.r code-line-numbers="|1|4-5|8-12|13-16|17-21|22-24|25-29|30-31|34|37-44|47|50"}
+dl_station_pol <- function(anio_inicio, anio_fin, my_station, my_pol) {
+  
+  # Asegurarse de que los años se manejen correctamente como números
+  anio_inicio <- as.numeric(anio_inicio)
+  anio_fin <- as.numeric(anio_fin)
+  
+  # Filtrar y manipular los datos
+  x <- table_data_list |> 
+    filter(
+      SMCA == my_station,
+      parametro == my_pol
+    ) |> 
+    mutate(
+      date = ymd_h(paste(fecha, hora)),
+      year_date = year(date)
+    ) |> 
+    rename(
+      concentracion = valorAct,
+      clave_estacion = 'Clave de la estación',
+      nombre_estacion = 'Nombre de la estación'
+    ) |>
+    filter(
+      year_date >= anio_inicio & year_date <= anio_fin
+    ) |>  
+    select(
+      -c(file_path, nivelValidacion, 'Red de monitoreo', 
+         year_date,fecha, hora,O3, CO, SO2, NO2, PM2.5, 
+         PM10, VV, DV, TMP,HR, PP, RS)
+    ) |> 
+    left_join(coord_station_sinaica) |> 
+    select(-c(alt,obs_estac,SMCA,Municipio))
+  
+  # Formatear la columna date
+  x$date <- format(x$date, "%Y-%m-%d %H:%M:%S")
+  
+  # Escribir el resultado en un archivo CSV
+  write.csv(
+    x,
+    file = paste0(
+      getwd(), "/main_presentation_files/database-presentation/cdmx/data_", 
+      my_pol, "_", my_station, "_", anio_inicio, "_to_", anio_fin, ".csv"
+    ),
+    fileEncoding = "latin1"
+  )
+  
+  # Devolver el data frame filtrado y manipulado
+  return(x)
+}
+
+dl_station_pol(2022,2022,"Ciudad de México","PM10")
+
+```
+
 
 ## Análisis Exploratorio de los Datos (EDA) {style="font-size: 0.8em; text-align:justify"}
 
-:::{.columns}
-
-:::{.column width="50%"}
 ```{r}
-eda_pm10 <- pollution_call("PM10") |> 
-  openair::aqStats(pollutant = "PM10",type="nombre_estacion") |> 
-  gt()
-  
+source("clean_script.R")
 ```
-:::
 
-:::{.column width="50%"}
+```{r}
+#| echo: false
+#| output-location: slide
+station_calendar_plot("PM10")
+```
 
-Add graph
-
-:::
-
-
-:::
-
-## Slide with speaker notes
-
-Slide content
-
-::: notes
-Esta lamina habla con la importancia de contar con un guión
-:::
 
 ## Ejemplo
 
@@ -144,5 +190,8 @@ ggplot(airquality, aes(Temp, Ozone)) +
   geom_smooth(method = "loess")
   
 ```
+
+
+
 
 
