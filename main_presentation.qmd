@@ -10,6 +10,8 @@ format:
     chalkboard: true
     footer: "Reunión anual: Red Delfin de Contaminación Atmosférica"
     code-block-height: 450px
+    footnotes-hover: false
+    scrollable: true
 editor: visual
 ---
 
@@ -20,7 +22,8 @@ library(pacman)
 p_load(tidyverse,
        openair,
        openairmaps,
-       gt,shiny)
+       gt,
+       flextable)
 ```
 
 
@@ -28,25 +31,40 @@ p_load(tidyverse,
 
 # Semblanza {style="font-size: 0.8em; text-align:justify"}
 
+:::{.columns}
+
+:::{.column width="85%; text-align:justify"}
+
 :::incremental
+
 - Investigación: "Efecto de micropartículas de carbonato de calcio y dióxido de silicio presentes en el material particulado fino del área metropolitana de Monterrey, en la compresibilidad del surfactante pulmonar"
 
+\n
 
 - Supervisor de calidad en la Secretaría de Medio Ambiente del Estado de Nuevo León
 
+\n
+
+- Consultor ambiental de monitoreo y caracterización de contaminantes atmosféricos mediante equipos de alto y bajo impacto, equipos de bajo costo y análisis de datos de contaminantes criterio y meteorológicos. 
+:::
+:::
+
+:::{.column width="15%"}
+:::incremental
+![](main_presentation_files/figure-presentation/langmuir.jpg){.absolute top=90 left=900 width="200" height="150"}
+
 ![](main_presentation_files/figure-presentation/sima.jpg){.absolute top=270 left=900 width="200" height="150"}
 
-
-- Consultor ambiental 
-
-![](main_presentation_files/figure-presentation/consultoria.jpg){.absolute top=500 left=900 width="100" height="150"}
+![](main_presentation_files/figure-presentation/consultoria.jpg){.absolute top=450 left=900 width="100" height="150"}
+:::
+:::
 :::
 
 # Introducción
 
-# ¿ Que es r y Rstudio? {style="font-size: 0.8em; text-align:justify"}
+## ¿ Que es r y Rstudio? {style="font-size: 0.8em; text-align:justify"}
 
-r es un software gratuito y con un ambiente para generar **computación estadística** y **gráficas de alto nivel**. Las principales características que posee este software son:
+r^[https://www.r-project.org/] es un software gratuito y con un ambiente para generar **computación estadística** y **gráficas de alto nivel**. Las principales características que posee este software son:
 
 ::: incremental
 -   Orientado a objetos
@@ -55,15 +73,13 @@ r es un software gratuito y con un ambiente para generar **computación estadís
 -   Paquetes respaldados por la comunidad de R
 :::
 
-![](main_presentation_files/figure-presentation/r_logo.png){.absolute top=500 left=450 width="100" height="100"}
-
+![](main_presentation_files/figure-presentation/r_logo.png){.absolute top=500 left=800 width="100" height="100"}
 
 ::: notes
 Los paquetes son un conjunto de funciones que han sido revisadas por la comunidad y el CRAN, dandole una mayor confiabilidad al paquete que se encuentra en CRAN, en el caso de los paquetes hechos por la comunidad no se tiene la certeza de tener un mantenimiento constante o en su defecto, si las funciones son correctas. 
 :::
---- 
 
-# {style="font-size: 0.8em; text-align:justify"}
+## {style="font-size: 0.8em; text-align:justify"}
 
 Rstudio (Posit) es una IDE que permite desarrollar códigos del software r, haciendo más sencillo su uso. A partir de 2023, se puede correr códigos del software python, haciendo más dinámico emplear ambos tipos de software para extraer información, ordenarla, aplicar diversos análisis estadísticos, visuliazarlos y compartirlos.
 
@@ -77,9 +93,7 @@ Paqueterías especializadas en el tratamiento de información referente a contam
 
 ![](main_presentation_files/figure-presentation/logo.png){.absolute top=450 left=450 width="200" height="200"}
 
----
-
-# {style="font-size: 0.8em; text-align:justify"}
+## {style="font-size: 0.8em; text-align:justify"}
 
 - Openairmaps: Conjunto de funciones que permiten visualizar espacialmente diversos conjuntos de datos enfocados en datos meteorológicos y de calidad del aire.
 
@@ -91,18 +105,30 @@ Paqueterías especializadas en el tratamiento de información referente a contam
 
 Se extiende a lo largo del valle del México, teniendo 32 estaciones de monitoreo entre la ciudad de México y Estado de México. Está red es de las más extensas y la primera en operar en México (1986) la cual dio paso a los procedimientos y leyes en materia de contaminación atmosférica y control de emisiones. Actualmente mide las concentraciones de los contaminantes criterio:
 
-::: Incremental
+:::{.columns}
+
+:::{.column width="30%; text-align:center"}
 -PM~10~
 
 -PM~2.5~
+
+:::
+
+:::{.column width="30%; text-align:center"}
 
 -O~3~
 
 -SO~2~
 
+:::
+
+:::{.column width="30%; text-align:center"}
+
 -NO~2~
 
 -CO
+:::
+
 :::
 
 La información es compartida atraves de su página: aire.cdmx.gob.mx y en el portal de datos abiertos de la ciudad de México, además del Sistema Nacional de Información de la Calidad del Aire (SINAICA).
@@ -168,30 +194,116 @@ dl_station_pol(2022,2022,"Ciudad de México","PM10")
 
 ## Análisis Exploratorio de los Datos (EDA) {style="font-size: 0.8em; text-align:justify"}
 
+Está gráfica muestra el EDA del contaminante PM~10~ de las estaciones durante 2021-2022. 
+
 ```{r}
+#| echo: false
+
 source("clean_script.R")
+
+
 ```
 
 ```{r}
 #| echo: false
 #| output-location: slide
-station_calendar_plot("PM10")
+
+pollution_call("PM10") |> 
+  relocate(date) |> 
+  aqStats(
+    pollutant = "PM10",
+    type = c("year","nombre_estacion")
+    ) |> 
+  rename(
+    "Estación" = nombre_estacion,
+    Contaminante = pollutant,
+    "Año" = year,
+    Promedio = mean,
+    "Minímo" = min,
+    "Máximo" = max,
+    Mediana = median,
+    "Máximo diario" = max_daily,
+    "Percentil 95" = percentile.95,
+    "Percentil 99" = percentile.99,
+    "Días" = days
+  ) |> 
+  select(-c(dat.cap,date,roll_8_max,roll_24_max)) |> 
+  flextable() |> flextable::color(color="white") |> color(part = 'header',color = 'white')
+
+
 ```
 
 
-## Ejemplo
+## Series de Tiempo {style="font-size: 0.5em; text-align:justify"}
+
+Gráfica con información del PM~10~ de las estaciones de la RAMA para los años 2021-2022, se presentan todas las estaciones, aunque algunas no cuenten con información para los años analizados.
+
+```{r}
+#|echo: false
+#|output-location: slide
+
+x <- pollution_call("PM10") |> 
+  select(-1) |> 
+  relocate(date) |> 
+  timePlot(
+    pollutant = "PM10",
+    type = "nombre_estacion",
+    avg.time = "day",
+    date.format = "%b",
+    data.thresh = .75,
+    ylab = "Concentración de PM10 (ug/m3)",date.breaks = 4)
+
+```
+
+## Patrones de Contaminantes {style="font-size: 0.5em; text-align:justify"}
+
+Comportamiento estacional del PM~10~ para los años 2021-2022 de las estaciones de la RAMA.
 
 ```{r}
 #| echo: false
 #| output-location: slide
-library(ggplot2)
-ggplot(airquality, aes(Temp, Ozone)) + 
-  geom_point() + 
-  geom_smooth(method = "loess")
-  
+
+trendLevel(pollution_call("PM10"),
+           pollutant = "PM10",
+           type = "season",
+           x = "hour",
+           y = "weekday")
 ```
 
+## Estimación de tendencias {style="font-size: 0.5em; text-align:justify"}
 
+Al tener un grupo de datos historicos, es posible determinar la tendencia a traves del tiempo del contaminante de interes, esto permite identificar si la toma de decisiones a generado un impacto en la reducción o en caso contrario un crimento en la concentración del contaminante.
 
+```{r}
+#|eecho: false
+#| output-location: slide
 
+TheilSen(pollution_call("PM10"), 
+         pollutant = "PM10", 
+         ylab = "PM10 (ug/m3)", 
+         deseason = TRUE,
+         date.format = "%Y",date.breaks = 4,
+         type = "nombre_estacion")
+```
 
+# Conclusiones
+
+## {style="font-size: 0.8em; text-align:justify"}
+
+::: incremental {style="font-size: 0.8em; text-align:justify"}
+- El software R permite realizar multiples tareas para la optimización en el manejo de datos, empleando menos tiempo, recursos informáticos, garantizando que la automatización de algunos procesos puede reducir errores técnicos.
+
+- La RAMA posee una gran cantidad de datos, que al implementar una función para la limpieza, homogenización y reducción de variables, permite generar un conjunto de datos adecuados para su estudio y visualización.
+
+- Los datos de la RAMA indican que el promedio de concentración para las estaciones y durante los años 2021 y 2022, oscila entre los 20 a 50 ug/m^3^, además, el impacto del PM~10~ en la ciudad de México se observa principalmente entre la primavera y el invierno. Sin embargo, la tendencia que se presenta es que las concentraciones van a la baja en aproximadamente 2-3 ug/m^3^ por año.
+:::
+
+## Bibliografía {style="font-size: 0.8em; text-align:justify"}
+
+- Carslaw, D. C., and K. Ropkins. 2012. “openair — An R package for air quality data analysis.” Environmental Modelling & Software 27–28 (0): 52–61. https://doi.org/10.1016/j.envsoft.2011.09.008.
+
+- Portal del Instituto Nacional de Transparencia y Acceso a la Información Pública "https://home.inai.org.mx/"
+
+- Portal de datos del Gobierno de la Ciudad de México "https://datos.cdmx.gob.mx/"
+
+# Gracias {style="font-size: 1em; text-align:justify"}

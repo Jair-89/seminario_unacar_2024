@@ -106,7 +106,7 @@ dl_station_pol <- function(anio_inicio, anio_fin, my_station, my_pol) {
       getwd(), "/main_presentation_files/database-presentation/cdmx/data_", 
       my_pol, "_", my_station, "_", anio_inicio, "_to_", anio_fin, ".csv"
     ),
-    fileEncoding = "latin1"
+    fileEncoding = "UTF-8"
   )
   
   # Devolver el data frame filtrado y manipulado
@@ -142,7 +142,7 @@ dl_station_meteo <- function(my_station,my_year){
          nombre_estacion = 'Nombre de la estación') |> 
   filter(year_date == my_year) |> 
   select(-c(fecha,hora,SMCA,year_date,'Red de monitoreo',
-            Municipio,id_estacion,codigo,validoOrig))
+            Municipio,nombre_estacion,clave_estacion,codigo,validoOrig))
   
   # Formatear la columna date
   x$date <- format(x$date, "%Y-%m-%d %H:%M:%S")
@@ -153,7 +153,7 @@ dl_station_meteo <- function(my_station,my_year){
       getwd(),"/main_presentation_files/database-presentation/cdmx/data_",
       my_station,"_meteo_",my_year,".csv"
       ),
-    fileEncoding = "latin1"
+    fileEncoding = "UTF-8"
     )
   
   return(x)
