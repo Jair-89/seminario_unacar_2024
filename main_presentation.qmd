@@ -13,6 +13,10 @@ format:
     footnotes-hover: false
     scrollable: true
 editor: visual
+source: project
+quarto-pub:
+  id: "qpa_lAp12lmBJbqtC9XKtWW9bXMPb2f5RA7sbXIAUqewbF74cTQHez9OWMznT3kOsYlN"
+  url: "https://lizauroz.quarto.pub/blog"
 ---
 
 ```{r}
